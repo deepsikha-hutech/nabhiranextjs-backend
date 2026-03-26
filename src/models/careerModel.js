@@ -11,7 +11,12 @@ const careerSchema = new mongoose.Schema({
   },
   linkedin: {
     type: String,
-    required: true
+    required: false
+  },
+  type: {
+    type: String,
+    enum: ['application', 'brochure'],
+    default: 'application'
   },
   resume: {
     type: String, // This will be the file path or identifier

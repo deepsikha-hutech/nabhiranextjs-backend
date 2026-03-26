@@ -10,6 +10,7 @@ const userRoutes = require('./routes/userRoutes');
 const careerRoutes = require('./routes/careerRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const eventRegistrationRoutes = require('./routes/eventRegistrationRoutes');
+const salesRoutes = require('./routes/salesRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/career', careerRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/event-registration', eventRegistrationRoutes);
+app.use('/api/sales', salesRoutes);
 
 app.get('/', (req, res) => {
   res.send('API running 🚀');

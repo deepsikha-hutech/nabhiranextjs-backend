@@ -5,6 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 // Public route for submission
 router.post('/apply', careerController.submitApplication);
+router.post('/brochure', careerController.submitBrochureRequest);
 
 // Protected routes for admin
 router.get('/all', authMiddleware, careerController.getAllApplications);

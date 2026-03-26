@@ -27,8 +27,8 @@ const contactSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['General', 'Industries', 'Solutions', 'Case Study', 'Blog', 'Service', 'Career'],
-    default: 'General'
+    enum: ['Industries', 'Solutions', 'Case Study', 'Blog', 'Service', 'Career', 'Other'],
+    default: 'Solutions'
   },
   status: {
     type: String,

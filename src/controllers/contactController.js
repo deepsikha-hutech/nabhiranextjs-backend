@@ -12,7 +12,7 @@ exports.submitContact = async (req, res) => {
       message,
       pageTitle,
       pageUrl,
-      category: category || 'General'
+      category: category
     });
 
     await newContact.save();

@@ -19,6 +19,50 @@ exports.submitApplication = async (req, res) => {
 
     await newApplication.save();
 
+    // Trigger automated notification email to admin
+    const adminLink = "http://localhost:3000/admin/dashboard/career";
+    
+    await sendEmail({
+      to: 'deepsikha@hutechsolutions.com',
+      subject: `New Job Application Received: ${name}`,
+      html: `
+        <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+          <h2 style="color: #11253e;">New Job Application Received</h2>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0; color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; width: 120px;">Name</td>
+              <td style="padding: 8px 0; color: #11253e; font-weight: bold;">${name}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Email</td>
+              <td style="padding: 8px 0; color: #11253e;">${email}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">LinkedIn</td>
+              <td style="padding: 8px 0; color: #11253e;">
+                ${linkedin ? `<a href="${linkedin}" style="color: #f99d1c;">${linkedin}</a>` : 'Not provided'}
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Page URL</td>
+              <td style="padding: 8px 0; color: #11253e;">${pageUrl || 'N/A'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Page Title</td>
+              <td style="padding: 8px 0; color: #11253e;">${pageTitle || 'N/A'}</td>
+            </tr>
+          </table>
+          
+          <div style="margin: 30px 0; text-align: center;">
+            <a href="${adminLink}" style="background-color: #f99d1c; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">View in Admin Dashboard</a>
+          </div>
+          
+          <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+          <p style="font-size: 11px; color: #aaa;">This notification was sent from the Nabhira Careers page.</p>
+        </div>
+      `
+    });
+
     res.json({ success: true, message: "Application submitted successfully" });
   } catch (error) {
     console.error("Submission error:", error);

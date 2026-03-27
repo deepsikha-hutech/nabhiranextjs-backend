@@ -15,7 +15,7 @@ exports.submitChatQuery = async (req, res) => {
 
     // Send notification to admin
     await sendEmail({
-      to: 'deepsikhapradhan.rk@hutechsolutions.in',
+      to: 'deepsikha@hutechsolutions.com',
       subject: `New Chat Query from ${email}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">

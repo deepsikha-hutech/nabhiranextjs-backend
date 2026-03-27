@@ -4,17 +4,15 @@ const sendEmail = async ({ to, subject, html, attachments = [] }) => {
   try {
     // These should be in .env
     const transporter = nodemailer.createTransport({
-      host: "smtp.hostinger.com",   // ✅ correct SMTP
-      port: 465,                    // ✅ use 465
-      secure: true,                 // ✅ MUST be true for 465
+      service: 'gmail',
       auth: {
-        user: process.env.SMTP_USER, // your full email
-        pass: process.env.SMTP_PASS, // your email password
-      },
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      }
     });
 
     const mailOptions = {
-      from: `"Nabhira Technologies" <${process.env.SMTP_USER || 'deepsikha.rk@hutechsolutions.in'}>`,
+      from: `"Nabhira Technologies" <${process.env.SMTP_USER || 'deepsikha@hutechsolutions.com'}>`,
       to,
       subject,
       html,
